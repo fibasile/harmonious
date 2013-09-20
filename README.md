@@ -30,6 +30,15 @@ At this point you can run grunt in the main folder
    grunt
 ```
 
+Now you should find the executable harmonious.app in the build folder:
+
+``` 
+cd build/releases/harmonious/mac/
+open harmonious.app
+```
+
+
+
 License
 -------
 
