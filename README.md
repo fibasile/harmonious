@@ -11,18 +11,24 @@ Make sure you have npm installed.
 
 Go to the main folder and type:
 
+```
    npm install
+```
 
 Then:
 
+```
    cd public
    npm install
+```
 
 At this point you can run grunt in the main folder
 
+
+```
    cd ..
    grunt
-
+```
 
 License
 -------
