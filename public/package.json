@@ -1,0 +1,19 @@
+{
+  "name": "harmonious",
+  "version": "0.0.1",
+  "description": "A native outliner based on Concord",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "main": "index.html",
+  "author": "Fiore Basile",
+  "license": "BSD",
+  "window" : {
+    "title" : "Harmonious",
+    "toolbar" : false
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-node-webkit-builder": "~0.1.6"
+  }
+}
