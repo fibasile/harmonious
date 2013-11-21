@@ -1,8 +1,9 @@
 {
   "name": "harmonious",
   "description": "A native outliner based on Concord",
+  "version" : "0.0.1",
   "devDependencies": {
     "grunt": "~0.4.1",
-    "grunt-node-webkit-builder": "~0.1.6"
+    "grunt-node-webkit-builder": "0.1.11"
   }
 }

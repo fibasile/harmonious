@@ -2,7 +2,7 @@ harmonious.menu = (function() {
 	return {
 		init: function() {
 			var gui = harmonious.gui;
-			var	win = gui.Window.get(),
+			var win = gui.Window.get(),
 				// Create menu container
 				menubar = new gui.Menu({
 					type: 'menubar'
@@ -12,7 +12,7 @@ harmonious.menu = (function() {
 			win.menu.insert(this.fileMenu(gui), 1);
 			// edit
 			// outline
-			win.menu.insert(this.outlineMenu(gui),3);
+			win.menu.insert(this.outlineMenu(gui), 3);
 			// debug
 			if (harmonious.config.showDebug) {
 				win.menu.append(this.debugMenu(gui));
@@ -20,7 +20,9 @@ harmonious.menu = (function() {
 			// help
 			win.menu.append(this.helpMenu(gui));
 		},
-
+		currentOutliner: function() {
+			return harmonious.controller.currentWindow.hdoc.outliner;
+		},
 		fileMenu: function(gui) {
 			var _this = this;
 			var FM = new gui.Menu(),
@@ -134,71 +136,71 @@ harmonious.menu = (function() {
 				om_outExpandEvery = new gui.MenuItem({
 					label: 'Expand Everything',
 					type: 'normal',
-					click:  this.outExpandEvery
+					click: this.outExpandEvery
 				}),
 				om_outCollapse = new gui.MenuItem({
 					label: 'Collapse',
 					type: 'normal',
-					click:  this.outCollapse
+					click: this.outCollapse
 				}),
 				om_outCollapseEvery = new gui.MenuItem({
 					label: 'Collapse Everything',
 					type: 'normal',
-					click:  this.outCollapseEvery
+					click: this.outCollapseEvery
 				}),
 				om_outMoveUp = new gui.MenuItem({
 					label: 'Move Up',
 					type: 'normal',
-					click:  this.outMoveUp
+					click: this.outMoveUp
 				}),
 				om_outMoveDown = new gui.MenuItem({
 					label: 'Move Down',
 					type: 'normal',
-					click:  this.outMoveDown
+					click: this.outMoveDown
 				}),
 				om_outMoveLeft = new gui.MenuItem({
 					label: 'Move Left',
 					type: 'normal',
-					click:  this.outMoveLeft
+					click: this.outMoveLeft
 				}),
 				om_outMoveRight = new gui.MenuItem({
 					label: 'Move Right',
 					type: 'normal',
-					click:  this.outMoveRight
+					click: this.outMoveRight
 				}),
 				om_outPromote = new gui.MenuItem({
 					label: 'Promote',
 					type: 'normal',
-					click:  this.outPromote
+					click: this.outPromote
 				}),
 				om_outDemote = new gui.MenuItem({
 					label: 'Demote',
 					type: 'normal',
-					click:  this.outDemote
-					
+					click: this.outDemote
+
 				});
-				
-				om.append(om_outExpand);
-				om.append(om_outExpandSubs);
-				om.append(om_outExpandEvery);
-				om.append(new gui.MenuItem({
-					type: 'separator'
-				}));
-				om.append(om_outCollapse);
-				om.append(om_outCollapseEvery);
-				om.append(new gui.MenuItem({
-					type: 'separator'
-				}));
-				om.append(om_outMoveUp);
-				om.append(om_outMoveDown);
-				om.append(om_outMoveLeft);
-				om.append(om_outMoveRight);
-				om.append(new gui.MenuItem({
-					type: 'separator'
-				}));
-				om.append(om_outPromote);
-				om.append(om_outDemote);
-				
+
+			om.append(om_outExpand);
+			om.append(om_outExpandSubs);
+			om.append(om_outExpandEvery);
+			om.append(new gui.MenuItem({
+				type: 'separator'
+			}));
+			om.append(om_outCollapse);
+			om.append(om_outCollapseEvery);
+			om.append(new gui.MenuItem({
+				type: 'separator'
+			}));
+			om.append(om_outMoveUp);
+			om.append(om_outMoveDown);
+			om.append(om_outMoveLeft);
+			om.append(om_outMoveRight);
+			om.append(new gui.MenuItem({
+				type: 'separator'
+			}));
+			om.append(om_outPromote);
+			om.append(om_outDemote);
+
 			return omItem;
 		},
 
@@ -207,54 +209,63 @@ harmonious.menu = (function() {
 		},
 
 		openFile: function() {
-
+			harmonious.controller.showOpenFile();
 		},
 
 		saveFile: function() {
-
+			harmonious.controller.saveFile();
 		},
 		saveFileAs: function() {
+			harmonious.controller.saveFileAs();
 
 		},
 		closeFile: function() {
+			harmonious.controller.closeFile();
 
 		},
 		closeAll: function() {
+			harmonious.controller.closeAllFiles();
 
 		},
-		outExpand: function(){
-			
+		outExpand: function() {
+			harmonious.menu.currentOutliner().op.expand();
 		},
-		outExpandEvery: function(){
-			
+		outExpandEvery: function() {
+			harmonious.menu.currentOutliner().op.fullExpand();
+
 		},
-		outExpandSubs: function(){
-			
+		outExpandSubs: function() {
+			harmonious.menu.currentOutliner().op.expandAllLevels();
 		},
-		outCollapse: function(){
-			harmonious.controller.currentWindow.hdoc.outliner.op.collapse();
-			
+		outCollapse: function() {
+			harmonious.menu.currentOutliner().op.collapse();
+
 		},
-		outCollapseEvery: function(){
-			
+		outCollapseEvery: function() {
+			harmonious.menu.currentOutliner().op.fullCollapse();
+
 		},
-		outMoveUp: function(){
-			
+		outMoveUp: function() {
+			harmonious.menu.currentOutliner().op.reorg("up", 1);
 		},
-		outMoveDown: function(){
-			
+		outMoveDown: function() {
+			harmonious.menu.currentOutliner().op.reorg("down", 1);
 		},
-		outMoveLeft:function(){
-			
+		outMoveLeft: function() {
+			harmonious.menu.currentOutliner().op.reorg("left", 1);
+
 		},
-		outMoveRight:function(){
-			
+		outMoveRight: function() {
+			harmonious.menu.currentOutliner().op.reorg("right", 1);
+
 		},
-		outPromote:function(){
-			
+		outPromote: function() {
+
+			harmonious.menu.currentOutliner().op.promote();
 		},
-		outDemote:function(){
-			
+		outDemote: function() {
+
+			harmonious.menu.currentOutliner().op.demote();
 		},
 		showDebugger: function() {
 			harmonious.controller.showDevTools();

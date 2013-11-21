@@ -8,7 +8,8 @@ grunt.initConfig({
         win: false, // We want to build it for win
         linux32: false, // We don't need linux32
         linux64: false, // We don't need linux64
-        credits: './public/credits.html'
+        credits: './public/credits.html',
+        version: '0.8.0'
     },
     src: ['./public/**/*'] // Your node-wekit app
   },
